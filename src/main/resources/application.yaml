@@ -1,0 +1,13 @@
+#Thu Apr 02 22:02:29 UTC 2026
+micronaut:
+  application:
+    name: demo
+
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
