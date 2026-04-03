@@ -64,6 +64,12 @@ micronaut {
     }
 
 }
+// Docker JVM — el plugin hardcodea "21-jre" para cualquier versión >= 21,
+// así que hay que sobreescribir baseImage directamente con el tipo correcto.
+tasks.named<io.micronaut.gradle.docker.MicronautDockerfile>("dockerfile") {
+    baseImage.set("eclipse-temurin:25-jre")
+}
+
 // Docker Native
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
     jdkVersion = "25"
