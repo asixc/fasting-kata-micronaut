@@ -1,4 +1,4 @@
-package dev.jotxee.controller
+package dev.jotxee.infrastructure.api
 
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
