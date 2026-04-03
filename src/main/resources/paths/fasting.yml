@@ -2,10 +2,11 @@ get:
   tags:
     - Fasting
   summary: Get fasting information
+  operationId: getFasting
   responses:
-  '200':
-    description: Successful response
-    content:
-    application/json:
-      schema:
-        $ref: './schemas/fasting/get.yml'
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/get.yml'
