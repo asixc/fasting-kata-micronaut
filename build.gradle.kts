@@ -5,6 +5,7 @@ plugins {
     id("io.micronaut.application") version "4.6.2"
     id("com.gradleup.shadow") version "9.4.1"
     id("io.micronaut.aot") version "4.6.2"
+    id("com.github.ben-manes.versions") version "0.53.0"
 }
 
 version = "0.1"
@@ -64,13 +65,41 @@ micronaut {
     }
 
 }
+// Filtrar versiones inestables en dependencyUpdates
+fun isStable(version: String): Boolean {
+    val unstableKeywords = listOf("alpha", "beta", "rc", "cr", "m", "preview", "snapshot")
+    return unstableKeywords.none { version.lowercase().contains(it) }
+}
+
+tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
+    rejectVersionIf { !isStable(candidate.version) }
+}
+
+// Git short hash — lazy, compatible con configuration cache
+val gitHash = providers.exec {
+    commandLine("git", "rev-parse", "--short", "HEAD")
+}.standardOutput.asText.map { it.trim() }
+
 // Docker JVM — el plugin hardcodea "21-jre" para cualquier versión >= 21,
 // así que hay que sobreescribir baseImage directamente con el tipo correcto.
 tasks.named<io.micronaut.gradle.docker.MicronautDockerfile>("dockerfile") {
     baseImage.set("eclipse-temurin:25-jre")
 }
 
+// Tag: nombre:version-gitHash  (ej: demo:0.1-a3f9c12)
+tasks.named<com.bmuschko.gradle.docker.tasks.image.DockerBuildImage>("dockerBuild") {
+    images.set(gitHash.map { hash ->
+        setOf("${project.name}:${project.version}-$hash")
+    })
+}
+
 // Docker Native
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
     jdkVersion = "25"
+}
+
+tasks.named<com.bmuschko.gradle.docker.tasks.image.DockerBuildImage>("dockerBuildNative") {
+    images.set(gitHash.map { hash ->
+        setOf("${project.name}:${project.version}-$hash-native")
+    })
 }
