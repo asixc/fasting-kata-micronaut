@@ -1,0 +1,22 @@
+openapi: 3.2.0
+info:
+    title: Fasting API
+    version: 0.0.1
+tags:
+    - name: Fasting
+      description: API for fasting information
+paths:
+    /fasting:
+    get:
+      tags:
+        - Fasting
+      summary: Get fasting information
+      responses:
+      '200':
+          description: Successful response
+          content:
+          application/json:
+              schema:
+              type: array
+              itesms:
+                $ref: '#/components/schemas/Fasting'
