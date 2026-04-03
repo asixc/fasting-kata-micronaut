@@ -43,12 +43,7 @@ kotlin {
     jvmToolchain(25)
 }
 
-
-
 graalvmNative.toolchainDetection = false
-
-
-
 
 micronaut {
     runtime("netty")
@@ -69,8 +64,7 @@ micronaut {
     }
 
 }
-
-
+// Docker Native
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
     jdkVersion = "25"
 }

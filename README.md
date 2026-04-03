@@ -29,4 +29,17 @@
 
 - [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
 
-
+## Commsnds: 
+- `./gradlew build` - Build the project
+- `./gradlew run` - Run the application
+- `./gradlew test` - Run tests
+- `./gradlew clean dockerBuild` - Build a Docker image JVM but is needed aggregate to build.gradle.kts:
+  - ```kotlin
+    tasks.named<io.micronaut.gradle.docker.Dockerfile>("dockerfile") {
+        baseImage.set("eclipse-temurin:25-jre")
+    }
+    ```
+- `./gradlew clean dockerBuildNative`  - Build a native image and create a Docker image
+- `docker image prune -a` - Remove all unused images
+- `docker system df -v` - Show detailed information about disk usage
+- 
