@@ -1,0 +1,32 @@
+type: object
+required:
+  - fastingType
+  - start
+
+properties:
+  fastingType:
+    type: string
+
+  duration:
+    type: object
+    properties:
+      hours:
+        type: integer
+        example: 16
+      minutes:
+        type: integer
+        example: 30
+      seconds:
+        type: integer
+        example: 10
+
+  start:
+    type: string
+    format: date-time
+
+  end:
+    type: string
+    format: date-time
+
+  notes:
+    type: string

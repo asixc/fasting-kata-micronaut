@@ -7,6 +7,7 @@ tags:
       description: API for fasting information
 paths:
     /fasting:
+      $ref: './paths/fasting.yml'
     get:
       tags:
         - Fasting
@@ -19,4 +20,4 @@ paths:
               schema:
               type: array
               itesms:
-                $ref: '#/components/schemas/Fasting'
+                $ref: './schemas/fasting/get.yml'
