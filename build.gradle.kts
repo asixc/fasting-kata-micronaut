@@ -9,11 +9,11 @@ plugins {
     id("io.micronaut.openapi") version "5.0.0-M1"
 }
 
-version = "0.1"
+version = "0.0.1"
 group = "dev.jotxee"
 
 
-val kotlinVersion = project.properties.get("kotlinVersion")
+val kotlinVersion = project.properties["kotlinVersion"]
 
 repositories {
     mavenCentral()
