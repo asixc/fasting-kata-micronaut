@@ -1,8 +1,10 @@
 package dev.jotxee
 
-import io.micronaut.runtime.Micronaut.run
+import io.micronaut.runtime.Micronaut
 
 
 fun main(args: Array<String>) {
-	run(*args)
+	Micronaut.build(*args)
+		.banner(false)
+		.start()
 }
