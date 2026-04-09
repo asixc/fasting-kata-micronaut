@@ -6,7 +6,7 @@ import io.micronaut.http.client.annotation.Client
 import io.micronaut.runtime.EmbeddedApplication
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -22,9 +22,9 @@ class HelloControllerTest {
 
     @Test
     fun testHello() {
-        Assertions.assertTrue(application.isRunning)
+        assertTrue(application.isRunning)
         val body = httpClient.toBlocking().retrieve("/hello")
-        Assertions.assertEquals("Hello World", body)
+        assertEquals("Hello World", body)
     }
 
     @Test
@@ -32,7 +32,6 @@ class HelloControllerTest {
         val response = httpClient.toBlocking().exchange("/hello", String::class.java)
         assertEquals(response.status, HttpStatus.OK)
         assertEquals(response.getBody().get() , "Hello World")
-
     }
 
 }
